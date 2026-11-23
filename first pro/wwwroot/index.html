@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مركز درايڤ - إدارة الصيانة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark"><svg viewBox="0 0 24 24"><path d="M3 16h18l-2-6H5l-2 6Zm3-6 1.5-4h9L18 10M5 16v3m14-3v3M7.5 18h9"/></svg></div><div><strong>DRIVE</strong><span>مركز الصيانة</span></div></div>
+    <nav>
+      <button class="nav-item active" data-page="dashboard"><span class="nav-icon">⌂</span>لوحة التحكم</button>
+      <button class="nav-item" data-page="invoices"><span class="nav-icon">▤</span>الفواتير</button>
+      <button class="nav-item" data-page="customers"><span class="nav-icon">♙</span>العملاء</button>
+      <button class="nav-item" data-page="cars"><span class="nav-icon">◇</span>السيارات</button>
+      <button class="nav-item" data-page="services"><span class="nav-icon">⌁</span>خدمات الورشة</button>
+      <button class="nav-item" data-page="accounts"><span class="nav-icon">₪</span>الحسابات والمصروفات</button>
+      <button class="nav-item" data-page="reports"><span class="nav-icon">▥</span>التقارير</button>
+    </nav>
+    <div class="sidebar-bottom">
+      <button class="nav-item" data-page="settings"><span class="nav-icon">⚙</span>الإعدادات</button>
+      <div class="profile"><div class="avatar">ع</div><div><strong>عبدالله أحمد</strong><span>مدير المركز</span></div><span class="dots">⋮</span></div>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <div><p class="eyebrow" id="currentDate"></p><h1 id="pageTitle">لوحة التحكم</h1></div>
+      <div class="header-actions"><label class="search"><span>⌕</span><input id="globalSearch" placeholder="بحث عن عميل أو سيارة..."></label><button class="icon-button notification">♢<i></i></button><button class="primary-button" id="openInvoice">＋ فاتورة جديدة</button></div>
+    </header>
+
+    <section id="dashboard" class="page active">
+      <div class="stats-grid">
+        <article class="stat-card"><div class="stat-icon blue">▤</div><div><span>إجمالي الفواتير</span><strong id="invoiceCount">0</strong><small><b>↑ 12%</b> عن الشهر الماضي</small></div></article>
+        <article class="stat-card"><div class="stat-icon green">₪</div><div><span>الإيرادات المحصلة</span><strong id="paidAmount">0 ج.م</strong><small><b>↑ 8.2%</b> عن الشهر الماضي</small></div></article>
+        <article class="stat-card"><div class="stat-icon amber">◷</div><div><span>المبالغ المعلقة</span><strong id="pendingAmount">0 ج.م</strong><small>مطلوب المتابعة</small></div></article>
+        <article class="stat-card"><div class="stat-icon violet">♙</div><div><span>العملاء المسجلين</span><strong id="customerCount">0</strong><small><b>↑ 5 عملاء</b> هذا الأسبوع</small></div></article>
+      </div>
+
+      <div class="content-grid">
+        <article class="panel chart-panel"><div class="panel-head"><div><h2>تحليل الإيرادات</h2><p>الإيرادات الشهرية خلال العام</p></div><select><option>آخر 6 أشهر</option><option>آخر سنة</option></select></div><div class="chart-summary"><strong>184,250 ج.م</strong><span>+14.5%</span></div><div class="chart" id="chart"><div class="gridlines"></div><div class="bars"></div></div></article>
+        <article class="panel"><div class="panel-head"><div><h2>حالة الخدمات</h2><p>الوضع الحالي للورشة</p></div></div><div class="donut-wrap"><div class="donut"><div><strong>32</strong><span>سيارة قيد الصيانة</span></div></div><div class="legend"><p><i class="green-dot"></i><span>تم الانتهاء</span><b>18</b></p><p><i class="blue-dot"></i><span>قيد الصيانة</span><b>32</b></p><p><i class="amber-dot"></i><span>بانتظار القطع</span><b>7</b></p></div></div></article>
+      </div>
+
+      <article class="panel recent"><div class="panel-head"><div><h2>أحدث الفواتير</h2><p>آخر العمليات المسجلة</p></div><button class="text-button" data-page-link="invoices">عرض الكل ←</button></div><div class="table-wrap"><table><thead><tr><th>رقم الفاتورة</th><th>العميل</th><th>السيارة</th><th>الخدمة</th><th>المبلغ</th><th>الحالة</th><th></th></tr></thead><tbody id="recentInvoices"></tbody></table></div></article>
+    </section>
+
+    <section id="invoices" class="page"><article class="panel"><div class="panel-head"><div><h2>جميع الفواتير</h2><p>إدارة وتتبع فواتير الصيانة</p></div><button class="primary-button" id="openInvoice2">＋ فاتورة جديدة</button></div><div class="table-wrap"><table><thead><tr><th>رقم الفاتورة</th><th>العميل</th><th>السيارة</th><th>الخدمة</th><th>المبلغ</th><th>الحالة</th><th>التاريخ</th><th></th></tr></thead><tbody id="allInvoices"></tbody></table></div></article></section>
+    <section id="customers" class="page"><article class="panel"><div class="panel-head"><div><h2>قائمة العملاء</h2><p>بيانات وتواصل العملاء المسجلين</p></div><button class="primary-button" id="openCustomer">＋ عميل جديد</button></div><div class="table-wrap"><table><thead><tr><th>العميل</th><th>رقم الهاتف</th><th>المنطقة</th><th>الإجراءات</th></tr></thead><tbody id="customerRows"></tbody></table></div></article></section>
+    <section id="cars" class="page"><article class="panel"><div class="panel-head"><div><h2>سجل السيارات</h2><p>السيارات المرتبطة بالعملاء</p></div><button class="primary-button" id="openCar">＋ سيارة جديدة</button></div><div class="table-wrap"><table><thead><tr><th>المالك</th><th>الموديل</th><th>لوحة الترخيص</th><th>قراءة العداد</th><th>الإجراءات</th></tr></thead><tbody id="carRows"></tbody></table></div></article></section>
+    <section id="services" class="page"><article class="panel"><div class="panel-head"><div><h2>قائمة خدمات الورشة</h2><p>الخدمات والأسعار والتكلفة والربحية</p></div><button class="primary-button" id="openService">＋ خدمة جديدة</button></div><div class="table-wrap"><table><thead><tr><th>الخدمة</th><th>التصنيف</th><th>سعر البيع</th><th>التكلفة</th><th>الربح</th><th>ضريبة مضافة</th><th>الإجراءات</th></tr></thead><tbody id="serviceRows"></tbody></table></div></article></section>
+    <section id="accounts" class="page"><div class="stats-grid"><article class="stat-card"><div class="stat-icon green">↓</div><div><span>إجمالي الإيرادات</span><strong id="accountIncome">0 ج.م</strong></div></article><article class="stat-card"><div class="stat-icon amber">↑</div><div><span>إجمالي المصروفات</span><strong id="accountExpense">0 ج.م</strong></div></article><article class="stat-card"><div class="stat-icon blue">₪</div><div><span>صافي الحساب</span><strong id="accountNet">0 ج.م</strong></div></article><article class="stat-card"><div class="stat-icon violet">◷</div><div><span>المستحقات</span><strong id="accountOutstanding">0 ج.م</strong></div></article></div><article class="panel recent"><div class="panel-head"><div><h2>دفتر الحسابات</h2><p>إيرادات وتحصيلات ومصروفات المركز</p></div><button class="primary-button" id="openTransaction">＋ حركة جديدة</button></div><div class="table-wrap"><table><thead><tr><th>التاريخ</th><th>الوصف</th><th>النوع</th><th>طريقة الدفع</th><th>المبلغ</th><th></th></tr></thead><tbody id="transactionRows"></tbody></table></div></article></section>
+    <section id="reports" class="page"><div class="content-grid"><article class="panel"><div class="panel-head"><div><h2>تقرير الإيرادات والمستحقات</h2><p>ملخص الأداء المالي</p></div><button class="secondary-button" onclick="window.print()">طباعة التقرير</button></div><div id="financialReport" class="report-content"></div></article><article class="panel"><div class="panel-head"><div><h2>أكثر الخدمات استخدامًا</h2><p>حسب عدد مرات الاستخدام</p></div></div><div id="serviceReport" class="report-content"></div></article></div></section>
+    <section id="settings" class="page"><article class="panel"><div class="panel-head"><div><h2>إعدادات المركز والفواتير</h2><p>بيانات الورشة والضرائب والطباعة والموظفين الافتراضيين</p></div></div><form id="settingsForm" class="form-grid"><label>اسم المركز<input name="workshopName" required></label><label>رقم الهاتف<input name="phone"></label><label class="full">العنوان<input name="address"></label><label>البريد الإلكتروني<input name="email" type="email"></label><label>الرقم الضريبي<input name="taxNumber"></label><label>السجل التجاري<input name="commercialRegister"></label><label>نسبة الضريبة الافتراضية (%)<input name="taxPercent" type="number" min="0" max="100"></label><label>بادئة رقم الفاتورة<input name="invoicePrefix"></label><label>اسم الموظف/المستخدم الافتراضي<input name="defaultIssuedBy"></label><label class="full">نص تذييل الفاتورة<input name="invoiceFooter"></label><label><span>تنبيهات المخزون المنخفض</span><select name="lowStockAlert"><option value="true">مفعّل</option><option value="false">غير مفعّل</option></select></label><div class="full modal-actions"><button type="submit" class="primary-button">حفظ الإعدادات</button></div></form></article></section>
+  </main>
+
+  <dialog id="invoiceModal" class="wide-modal"><form id="invoiceForm"><div class="modal-head"><div><p>فاتورة صيانة</p><h2 id="invoiceModalTitle">إصدار فاتورة جديدة</h2></div><button type="button" class="close-modal">×</button></div><div class="form-grid invoice-form"><input type="hidden" name="id" value="0"><label>العميل<select name="customerId" id="invoiceCustomer" required></select></label><label>السيارة<select name="carId" id="invoiceCar" required></select></label><label>تاريخ الفاتورة<input name="date" type="date" required></label><label>تاريخ الاستحقاق<input name="dueDate" type="date" required></label><label>قراءة عداد السيارة (كم)<input name="mileage" type="number" min="0" value="0"></label><label>الموظف الذي أصدر الفاتورة<input name="issuedBy" value="عبدالله أحمد" required></label><label>حالة الضمان<input name="warrantyNotes" placeholder="مثال: ضمان القطع 30 يومًا"></label><label>حالة الدفع<select name="status">
+<option>معلق</option><option>مدفوع جزئيًا</option><option>مدفوع</option></select></label><label>طريقة الدفع<select name="paymentMethod"><option>كاش</option><option>بطاقة بنكية</option><option>تحويل بنكي</option><option>فوري</option><option>أجل</option></select></label><label>المبلغ المدفوع<input name="paid" type="number" min="0" value="0"></label></div><div class="invoice-lines"><div class="line-head"><strong>الخدمات والأعمال</strong><button type="button" class="text-button" id="addInvoiceLine">＋ إضافة خدمة</button></div><div id="invoiceLines" class="invoice-lines-body"></div></div><div class="invoice-totals"><div class="form-grid"><label>نسبة الخصم (%)<input id="discountPercent" name="discountPercent" type="number" min="0" max="100" value="0"></label><label>نسبة الضريبة (%)<input id="taxPercent" name="taxPercent" type="number" min="0" max="100" value="14"></label><label class="full">ملاحظات داخل الفاتورة<textarea name="notes" placeholder="ملاحظات أو ملاحظات الضمان"></textarea></label></div><div class="totals-box"><p><span>الإجمالي قبل الخصم</span><strong id="subtotalValue">0 ج.م</strong></p><p><span>الخصم</span><strong id="discountValue">0 ج.م</strong></p><p><span>الضريبة</span><strong id="taxValue">0 ج.م</strong></p><p class="grand"><span>الإجمالي النهائي</span><strong id="totalValue">0 ج.م</strong></p></div></div><div class="modal-actions"><button type="button" class="secondary-button close-modal">إلغاء</button><button type="submit" class="primary-button">حفظ الفاتورة</button></div></form></dialog>
+  <dialog id="simpleModal"><form id="simpleForm"><div class="modal-head"><div><p id="simpleEyebrow">إضافة سجل</p><h2 id="simpleTitle">سجل جديد</h2></div><button type="button" class="close-simple">×</button></div><div class="form-grid" id="simpleFields"></div><div class="modal-actions"><button type="button" class="secondary-button close-simple">إلغاء</button><button type="submit" class="primary-button">حفظ</button></div></form></dialog>
+  <div class="toast" id="toast">تم الحفظ بنجاح</div>
+  <script src="app-v2.js"></script>
+</body>
+</html>

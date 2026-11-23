@@ -1,0 +1,11 @@
+@first_pro_HostAddress = http://localhost:5124
+
+GET {{first_pro_HostAddress}}/openapi/v1.json
+Accept: application/json
+
+###
+
+GET {{first_pro_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
